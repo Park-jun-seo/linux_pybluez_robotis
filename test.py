@@ -1,5 +1,5 @@
 import bluetooth as bt
-
+import time
 #######################################################
 # Scan
 #######################################################
@@ -29,9 +29,17 @@ try:
 
     while True:         
         try:
+            #data = b"\xff\x55\x00\xff\x00\xff"
+            #sbuff = data.hex()
+            #sock.send(data)
+            data = [0xff,0x55,0x04,0xfb,0x00,0xff]
             
-            data = b"\xff\x55\x00\xff\x00\xff"
-            sock.send(data)
+            dataarr = bytes(bytearray(data))
+            #dataarr = bytes(data[i])
+            sock.send(dataarr)
+            #print(data[i])
+                
+            time.sleep(1)
         except KeyboardInterrupt:
             print("disconnected")
             sock.close()

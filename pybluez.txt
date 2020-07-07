@@ -1,4 +1,19 @@
-#설치
+#linux bluez 설치 
+http://www.bluez.org
+http://zerovirus79.blogspot.com/2016/07/raspberry-pi-bluetooth-bluez.html
+
+sudo apt-get update
+sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
+ls
+bluez-5.40.tar.xz/
+tar xvf bluez-5.40.tar.xz
+cd bluez-5.40
+./configure
+make
+sudo make install
+
+
+#pybluez설치 3.7.5
 sudo apt-get update
 sudo apt-get install python-pip python-dev ipython
 
@@ -11,3 +26,5 @@ sudo pip install pybluez
 0xff, 0x55, 0x02, 0xfd, 0x00, 0xff #D
 0xff, 0x55, 0x04, 0xfb, 0x00, 0xff #L
 0xff, 0x55, 0x08, 0xf7, 0x00, 0xff #R
+
+
