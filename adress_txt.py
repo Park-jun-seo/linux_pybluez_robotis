@@ -1,15 +1,15 @@
 import bluetooth as bt
 import time
+f= open("address.txt",'r')
+
+line = f.read()
+address_arr = line.split('\n')
+print(address_arr)
 
 #######################################################
 # 검색
 #######################################################
 taget_num = 2
-target_address1 = "B8:63:BC:00:48:C8" # target device address
-target_address2 = "B8:63:BC:00:76:47" # target device address
-address_arr = []
-address_arr.append(target_address1)
-address_arr.append(target_address2)
 port = 1         # RFCOMM port
 
 
@@ -74,4 +74,5 @@ try:
             print("all done")
 except bt.btcommon.BluetoothError as err:
     print('An error occurred : %s ' % err)
+    f.close()
     pass
