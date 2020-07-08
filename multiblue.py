@@ -6,17 +6,37 @@ import time
 #######################################################
 #print(bt.discover_devices())
 taget_num = 2
-
 target_address1 = "B8:63:BC:00:48:C8" # target device address
 target_address2 = "B8:63:BC:00:76:47" # target device address
 address_arr = []
 address_arr.append(target_address1)
 address_arr.append(target_address2)
-print(address_arr)
-port = 1         # RFCOMM port
 
-nearby_devices = bt.discover_devices()
-print(nearby_devices)
+port = 1         # RFCOMM port
+print("input address : %s"%address_arr)
+
+
+while True :
+    nearby_devices = bt.discover_devices()
+    arr=[]
+    arr.append(address_arr)
+    print(arr)
+    for i in range(taget_num) :
+        try :
+            if address_arr[i] in nearby_devices:
+                del arr[i]
+        except:
+            pass
+    if len(arr) == 0:
+        print("all find")
+        print(nearby_devices)
+        break
+    elif len(arr) != 0:
+        print("all not find : %s"%arr)
+
+print("find pass!")
+print(address_arr)
+
 
 
 
@@ -51,9 +71,14 @@ try:
     while True:         
         try:
                 
-            dataarr = bytes(bytearray(L))         
-            sock1.send(dataarr)    #전송   
-            sock2.send(dataarr)    #전송           
+            dataarrL = bytes(bytearray(L))   
+            dataarrU = bytes(bytearray(U))        
+            sock1.send(dataarrU)    #전송   
+            sock2.send(dataarrL)    #전송           
+            
+            dataarrZ = bytes(bytearray(Z))         
+            sock1.send(dataarrZ)    #전송   
+            sock2.send(dataarrZ)    #전송    
             time.sleep(3)
         except KeyboardInterrupt:
             print("disconnected")
