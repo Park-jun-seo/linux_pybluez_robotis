@@ -13,7 +13,7 @@ make
 sudo make install
 
 
-#pybluez설치 3.7.5
+#pybluez설치 in 3.7.5 ver
 sudo apt-get update
 sudo apt-get install python-pip python-dev ipython
 
