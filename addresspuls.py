@@ -56,34 +56,43 @@ U = [0xff,0x55,0x01,0xfe,0x00,0xff]   #U 버튼
 D = [0xff,0x55,0x02,0xfd,0x00,0xff]   #D 버튼  
 R = [0xff,0x55,0x08,0xf7,0x00,0xff]   #R 버튼  
 L = [0xff,0x55,0x04,0xfb,0x00,0xff]   #L 버튼  
+dataarrZ = bytes(bytearray(Z))
+dataarrU = bytes(bytearray(U))
+dataarrD = bytes(bytearray(D))
+dataarrR = bytes(bytearray(R))
+dataarrL = bytes(bytearray(L))
+
 
 try:
+    for i in range(taget_num):
+        in_sock[i]=bt.BluetoothSocket(bt.RFCOMM)
 
-    sock1=bt.BluetoothSocket(bt.RFCOMM)
-    sock2=bt.BluetoothSocket(bt.RFCOMM)
+    for i in range(taget_num):
+        in_sock[i].connect((address_arr[i], port))
 
 
-    sock1.connect((address_arr[0], port))
-    sock2.connect((address_arr[1], port))
+    #ock1.connect((address_arr[0], port))
+    #sock2.connect((address_arr[1], port))
 
 
 
     while True:         
         try:
-                
-            dataarrL = bytes(bytearray(U))   
-            #dataarrU = bytes(bytearray(U))        
-            sock1.send(dataarrL)    #전송   
-            #sock2.send(dataarrL)    #전송           
-            
-            dataarrZ = bytes(bytearray(Z))         
-            sock1.send(dataarrZ)    #전송   
-            #sock2.send(dataarrZ)    #전송    
-            time.sleep(3)
+            a = int(input())
+            if a == 1 :
+                for i in range(3):
+                    for i in range(taget_num):
+                        in_sock[i].send(dataarrU)
+                    for i in range(taget_num):
+                        in_sock[i].send(dataarrZ)
+                    time.sleep(1)
+
+            for i in range(taget_num):
+                in_sock[i].send(dataarrZ)
         except KeyboardInterrupt:
             print("disconnected")
-            sock1.close()
-            #sock2.close()
+            for i in range(taget_num):
+                in_sock[i].close()
             print("all done")
 except bt.btcommon.BluetoothError as err:
     print('An error occurred : %s ' % err)
